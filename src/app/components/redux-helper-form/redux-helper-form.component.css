@@ -1,0 +1,23 @@
+.app-helper-form {
+    width: calc(100% - 32px);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: row;
+    flex-wrap: wrap;
+    margin: 16px;
+}
+
+.app-helper-form-field-row {
+    width: calc(100% - 32px);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    margin: 16px;
+}
+
+.app-helper-form-field {
+    width: 100%;
+}

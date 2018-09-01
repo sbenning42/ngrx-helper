@@ -1,0 +1,63 @@
+<form class="app-helper-form" [formGroup]="helperForm" novalidate>
+
+  <mat-form-field class="app-helper-form-field">
+    <input matInput type="text" placeholder="Name" formControlName="nameControl">
+    <mat-error *ngIf="nameControl.hasError('required')">
+      Name is required
+    </mat-error>
+  </mat-form-field>
+
+  <mat-form-field class="app-helper-form-field">
+    <textarea cdkTextareaAutosize matInput placeholder="Json Model" formControlName="modelControl"></textarea>
+    <mat-error *ngIf="modelControl.hasError('required')">
+      Json Model is required
+    </mat-error>
+    <mat-error *ngIf="!modelControl.hasError('required') && modelControl.hasError('invalidJson')">
+      Json Model is not valid JSON
+    </mat-error>
+  </mat-form-field>
+
+  <div class="app-helper-form-field-row">
+    <mat-form-field class="app-helper-form-field">
+      <input matInput type="text" placeholder="New Action Name" formControlName="newActionNameControl">
+    </mat-form-field>
+    <button class="app-helper-form-field" mat-button [disabled]="!this.newActionNameControl.value" (click)="addAction()">
+      Add Action
+    </button>
+  </div>
+
+  <ng-container formArrayName="actionsControlArray">
+    <ng-container *ngFor="let actionControl of actionsControlArray.controls; let i = index">
+
+      <div class="app-helper-form-field-row">
+        <mat-form-field class="app-helper-form-field">
+          <mat-label>{{ actions[i].type }}</mat-label>
+          <textarea cdkTextareaAutosize matInput placeholder="{{ actions[i].type }} Action Json Model" [formControlName]="i"></textarea>
+          <mat-error *ngIf="actionControl.hasError('required')">
+            {{ actions[i].type }} Action Json Model is required
+          </mat-error>
+          <mat-error *ngIf="!actionControl.hasError('required') && actionControl.hasError('invalidJson')">
+            {{ actions[i].type }} Action Json Model is not valid JSON
+          </mat-error>
+        </mat-form-field>
+        <button class="app-helper-form-field" color="warn" mat-button (click)="removeAction(i)">
+          Remove Action
+        </button>
+      </div>
+
+    </ng-container>
+  </ng-container>
+
+  <button class="app-helper-form-field" color="primary" mat-button [disabled]="helperForm.invalid" (click)="generate()">
+    Generate
+  </button>
+
+</form>
+<mat-card>
+  <mat-card-header>
+    <mat-card-title>Redux boilerplate code</mat-card-title>
+  </mat-card-header>
+  <mat-card-content>
+    <p [innerHtml]="templateHtml"></p>
+  </mat-card-content>
+</mat-card>

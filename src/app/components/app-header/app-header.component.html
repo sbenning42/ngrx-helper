@@ -1,0 +1,9 @@
+<mat-toolbar color="primary">
+  <h1>{{ title }}</h1>
+  <span class="app-mat-spacer"></span>
+  <ng-container *ngFor="let action of actions">
+    <button mat-icon-button (click)="react(action)">
+      <mat-icon>{{ action.icon }}</mat-icon>
+    </button>
+  </ng-container>
+</mat-toolbar>
