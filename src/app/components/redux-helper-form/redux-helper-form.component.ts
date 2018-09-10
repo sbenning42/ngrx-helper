@@ -118,6 +118,21 @@ export class ReduxHelperFormComponent implements OnInit {
           .reduce((p,c) => p?p+`\n\t\t|${c}`:c, '')
       };
 
+      export function ${this.nameControl.value}Reducer (
+        state: ${this.nameControl.value}State,
+        action: ${this.nameControl.value}ActionsUnion
+      ): ${this.nameControl.value}State {
+        switch () {
+          ${
+            this.actions
+              .map(a => `case ${this.nameControl.value}ActionTypes.${a.type}:\n\t\t`)
+              .reduce((p,c) => p+c, '')
+          }
+          default:
+            return state;
+        }
+      }
+
     `;
     console.log(this.template);
     this.templateHtml = this.template.replace(/\n/g, '<br/>');
